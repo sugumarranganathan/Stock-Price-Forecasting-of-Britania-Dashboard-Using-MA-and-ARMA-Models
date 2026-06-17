@@ -157,7 +157,6 @@ plot_pacf(
 )
 
 st.pyplot(fig)
-
 # ==========================================
 # ARMA(1,1) FORECAST
 # ==========================================
@@ -166,52 +165,78 @@ st.subheader("🔮 Britannia Next 4-Day Forecast (ARMA(1,1))")
 
 try:
 
-    arma_model = ARIMA(
+    model = ARIMA(
         df["close"],
-        order=(1, 0, 1)
+        order=(1,0,1)
     )
 
-    arma_fit = arma_model.fit()
+    best_fit = model.fit()
 
-    future_forecast = arma_fit.forecast(
+    future_diff = best_fit.forecast(
         steps=4
     )
 
-    forecast_df = pd.DataFrame({
-        "Day": [
+    future_price = []
+
+    current_price = df["close"].iloc[-1]
+
+    for diff in future_diff:
+
+        current_price = current_price + diff
+
+        future_price.append(
+            current_price
+        )
+
+    forecast_price_df = pd.DataFrame({
+
+        "Day":[
             "Day 1",
             "Day 2",
             "Day 3",
             "Day 4"
         ],
+
         "Forecasted Close Price":
-        future_forecast.values
+        future_price
+
     })
 
-    st.dataframe(forecast_df)
+    st.dataframe(
+        forecast_price_df
+    )
 
-    fig, ax = plt.subplots(figsize=(10, 5))
+    fig, ax = plt.subplots(
+        figsize=(8,4)
+    )
 
     ax.plot(
-        forecast_df["Day"],
-        forecast_df["Forecasted Close Price"],
-        marker="o",
-        linewidth=2
+        forecast_price_df["Day"],
+        forecast_price_df["Forecasted Close Price"],
+        marker="o"
     )
 
     ax.set_title(
         "Britannia Next 4-Day Forecast (ARMA(1,1))"
     )
 
-    ax.set_xlabel("Future Days")
-    ax.set_ylabel("Forecasted Close Price")
+    ax.set_xlabel(
+        "Future Days"
+    )
+
+    ax.set_ylabel(
+        "Forecasted Close Price"
+    )
+
     ax.grid(True)
 
     st.pyplot(fig)
 
 except Exception as e:
 
-    st.error(f"Forecast Error: {e}")
+    st.error(
+        f"Forecast Error: {e}"
+    )
 
 # ==========================================
 # FOOTER
