@@ -14,10 +14,7 @@ st.set_page_config(
 st.title("📈 Britannia Stock Price Forecasting Dashboard")
 
 # Upload CSV
-uploaded_file = st.file_uploader(
-    "Upload Britannia CSV File",
-    type=["csv"]
-)
+df = pd.read_csv("BRITANNIA.NS_stock_data.csv")
 
 if uploaded_file:
 
