@@ -192,121 +192,6 @@ train = series_diff[:train_size]
 test = series_diff[train_size:]
 
 # ==================================================
-# MA MODEL COMPARISON
-# ==================================================
-
-st.header("📊 MA Model Comparison")
-
-ma_results = []
-
-for q in range(1,4):
-
-    model = ARIMA(
-        train,
-        order=(0,0,q)
-    )
-
-    fit = model.fit()
-
-    forecast = fit.forecast(
-        steps=len(test)
-    )
-
-    rmse = np.sqrt(
-        mean_squared_error(
-            test,
-            forecast
-        )
-    )
-
-    ma_results.append([
-        f"MA({q})",
-        rmse
-    ])
-
-ma_df = pd.DataFrame(
-    ma_results,
-    columns=["Model","RMSE"]
-)
-
-ma_df = ma_df.sort_values("RMSE")
-
-st.dataframe(
-    ma_df,
-    use_container_width=True
-)
-
-best_ma = ma_df.iloc[0]["Model"]
-
-st.success(
-    f"Best MA Model : {best_ma}"
-)
-
-# ==================================================
-# ARMA MODEL COMPARISON
-# ==================================================
-
-st.header("📊 ARMA Model Comparison")
-
-arma_results = []
-
-for p in range(1,4):
-
-    for q in range(1,4):
-
-        model = ARIMA(
-            train,
-            order=(p,0,q)
-        )
-
-        fit = model.fit()
-
-        forecast = fit.forecast(
-            steps=len(test)
-        )
-
-        rmse = np.sqrt(
-            mean_squared_error(
-                test,
-                forecast
-            )
-        )
-
-        arma_results.append([
-            p,
-            q,
-            rmse
-        ])
-
-arma_df = pd.DataFrame(
-    arma_results,
-    columns=[
-        "AR Order",
-        "MA Order",
-        "RMSE"
-    ]
-)
-
-arma_df = arma_df.sort_values("RMSE")
-
-st.dataframe(
-    arma_df,
-    use_container_width=True
-)
-
-best_p = int(
-    arma_df.iloc[0]["AR Order"]
-)
-
-best_q = int(
-    arma_df.iloc[0]["MA Order"]
-)
-
-st.success(
-    f"Best ARMA Model : ARMA({best_p},{best_q})"
-)
-
-# ==================================================
 # FORECAST
 # ==================================================
 
@@ -392,8 +277,6 @@ st.header("📌 Conclusion")
 
 st.info(
     f"""
-Best MA Model : {best_ma}
-Best ARMA Model : ARMA({best_p},{best_q})
 Forecast for next 4 days generated using the
 best ARMA model based on lowest RMSE.
 Lower RMSE indicates better prediction accuracy.
