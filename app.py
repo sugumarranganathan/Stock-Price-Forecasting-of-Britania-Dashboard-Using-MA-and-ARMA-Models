@@ -30,14 +30,6 @@ except:
     st.error("Dataset file not found.")
     st.stop()
 
-uploaded_file = st.file_uploader(
-    "Upload CSV File (Optional)",
-    type=["csv"]
-)
-
-if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
-
 # ==================================================
 # DATA CLEANING
 # ==================================================
@@ -259,9 +251,7 @@ for i,value in enumerate(
         ha="center"
     )
 
-ax.set_title(
-    f"Britannia Forecast Using ARMA({best_p},{best_q})"
-)
+
 
 ax.set_xlabel("Future Days")
 ax.set_ylabel("Forecast Price (₹)")
