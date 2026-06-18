@@ -67,10 +67,3 @@ https://colab.research.google.com/drive/1nQOrWPsqXeriksx_gm4hz_mDh0ieDBbh
 ## 👨‍💻 Prepared by
 **Sugumar Ranganathan (MBA)**
 
-GitHub:
-https://github.com/sugumarranganathan
-
-LinkedIn:
-https://www.linkedin.com/in/sugumar-ranganathan-mba
-
-
