@@ -37,31 +37,7 @@ Statsmodels
 Scikit-Learn
 Jupyter Notebook
 GitHub
-📂 Project Structure
-Britannia Time Series Analysis/
-│
-├── data/
-│   └── BRITANNIA.NS_stock_data.csv
-│
-├── notebooks/
-│   └── Stock_Price_Forecasting_of_Britannia_Using_MA_and_ARMA_Model.ipynb
-│
-├── src/
-│   └── stock_price_forecasting_of_britania_using_ma_and_arma_model.py
-│
-├── images/
-│   ├── stock_price_trend.png
-│   ├── rolling_mean_std.png
-│   ├── adf_test_result.png
-│   ├── acf_plot.png
-│   ├── pacf_plot.png
-│   ├── ma_forecast.png
-│   ├── arma_forecast.png
-│   └── rmse_comparison.png
-│
-├── README.md
-│
-└── requirements.txt
+
 🔄 Project Workflow
 Step	Activity
 1	Data Collection
